@@ -31,10 +31,28 @@ describe("create", function() {
 })
 
 
+describe("delete", function() {
+    beforeEach(async () => {
+        await db("users").truncate();
+    });
 
-// describe("delete", function() {
+    describe("can delete a new user", () => {
+        it("can create a new user", async () => {
+            await Users.insert({ username: "tester"});
+     
+            const users = await db('users');
+     
+            expect(users).toHaveLength(1)
+         })
 
-
+         it("can delete a new user", async () => {
+            await Users.remove(1);
+     
+            const users = await db('users');
+     
+            expect(users).toHaveLength(0)
+         })
+    })
 
     
-// })
+})
